@@ -58,7 +58,7 @@ def train(epoch):
             target = Variable(target).cuda(gpus_list[0])
             bicubic = Variable(bicubic).cuda(gpus_list[0])
             neigbor = [Variable(j).cuda(gpus_list[0]) for j in neigbor]
-            flow = [Variable(j).cuda(gpus_list[0]) for j in flow]
+            flow = [Variable(j).cuda(gpus_list[0]).float() for j in flow]
 
         optimizer.zero_grad()
         t0 = time.time()
@@ -105,7 +105,7 @@ training_data_loader = DataLoader(dataset=train_set, num_workers=opt.threads, ba
 
 print('===> Building model ', opt.model_type)
 if opt.model_type == 'RBPN':
-    model = RBPN(num_channels=3, base_filter=256,  feat = 64, num_stages=3, n_resblock=5, nFrames=opt.nFrames, scale_factor=opt.upscale_factor) ###D-DBPN
+    model = RBPN(num_channels=3, base_filter=256,  feat = 64, num_stages=3, n_resblock=5, nFrames=opt.nFrames, scale_factor=opt.upscale_factor) 
 
 model = torch.nn.DataParallel(model, device_ids=gpus_list)
 criterion = nn.L1Loss()

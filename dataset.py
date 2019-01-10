@@ -91,8 +91,13 @@ def get_flow(im1, im2):
     
     u, v, im2W = pyflow.coarse2fine_flow(im1, im2, alpha, ratio, minWidth, nOuterFPIterations, nInnerFPIterations,nSORIterations, colType)
     flow = np.concatenate((u[..., None], v[..., None]), axis=2)
-    
+    #flow = rescale_flow(flow,0,1)
     return flow
+
+def rescale_flow(x,max_range,min_range):
+    max_val = np.max(x)
+    min_val = np.min(x)
+    return (max_range-min_range)/(max_val-min_val)*(x-max_val)+max_range
 
 def modcrop(img, modulo):
     (ih, iw) = img.size
@@ -188,8 +193,7 @@ class DatasetFromFolder(data.Dataset):
             input = self.transform(input)
             bicubic = self.transform(bicubic)
             neigbor = [self.transform(j) for j in neigbor]
-            flow = [self.transform(j)*255. for j in flow]
-            #flow = [self.transform(j) for j in flow]
+            flow = [torch.from_numpy(j.transpose(2,0,1)) for j in flow]
 
         return input, target, neigbor, flow, bicubic
 
@@ -222,7 +226,7 @@ class DatasetFromFolderTest(data.Dataset):
             input = self.transform(input)
             bicubic = self.transform(bicubic)
             neigbor = [self.transform(j) for j in neigbor]
-            flow = [self.transform(j)*255. for j in flow]
+            flow = [torch.from_numpy(j.transpose(2,0,1)) for j in flow]
             
         return input, target, neigbor, flow, bicubic
       

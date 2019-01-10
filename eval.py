@@ -76,7 +76,7 @@ def eval():
     for batch in testing_data_loader:
         input, target, neigbor, flow, bicubic = batch[0], batch[1], batch[2], batch[3], batch[4]
         
-        if cuda:
+        with torch.no_grad():
             input = Variable(input).cuda(gpus_list[0])
             bicubic = Variable(bicubic).cuda(gpus_list[0])
             neigbor = [Variable(j).cuda(gpus_list[0]) for j in neigbor]
@@ -84,9 +84,11 @@ def eval():
 
         t0 = time.time()
         if opt.chop_forward:
-            prediction = chop_forward(input, neigbor, flow, model, opt.upscale_factor)
+            with torch.no_grad():
+                prediction = chop_forward(input, neigbor, flow, model, opt.upscale_factor)
         else:
-            prediction = model(input, neigbor, flow) 
+            with torch.no_grad():
+                prediction = model(input, neigbor, flow) 
         
         if opt.residual:
             prediction = prediction + bicubic
@@ -146,8 +148,9 @@ def chop_forward(x, neigbor, flow, model, scale, shave=8, min_size=2000, nGPUs=o
     if w_size * h_size < min_size:
         outputlist = []
         for i in range(0, 4, nGPUs):
-            input_batch = inputlist[i]#torch.cat(inputlist[i:(i + nGPUs)], dim=0)
-            output_batch = model(input_batch[0], input_batch[1], input_batch[2])
+            with torch.no_grad():
+                input_batch = inputlist[i]#torch.cat(inputlist[i:(i + nGPUs)], dim=0)
+                output_batch = model(input_batch[0], input_batch[1], input_batch[2])
             outputlist.extend(output_batch.chunk(nGPUs, dim=0))
     else:
         outputlist = [
@@ -159,7 +162,8 @@ def chop_forward(x, neigbor, flow, model, scale, shave=8, min_size=2000, nGPUs=o
     h_size, w_size = scale * h_size, scale * w_size
     shave *= scale
 
-    output = Variable(x.data.new(b, c, h, w), volatile=True)
+    with torch.no_grad():
+        output = Variable(x.data.new(b, c, h, w), volatile=True)
     output[:, :, 0:h_half, 0:w_half] \
         = outputlist[0][:, :, 0:h_half, 0:w_half]
     output[:, :, 0:h_half, w_half:w] \
