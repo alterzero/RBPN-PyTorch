@@ -7,7 +7,7 @@ Project page: http://www.toyota-ti.ac.jp/Lab/Denshi/iim/members/muhammad.haris/p
 * PyTorch >= 1.0.0
 * Pyflow -> https://github.com/pathak22/pyflow
 
-##########HOW TO##########
+## HOW TO
 
 #Training
 
