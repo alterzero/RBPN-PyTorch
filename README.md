@@ -1,6 +1,6 @@
 # Recurrent Back-Projection Network for Video Super-Resolution (CVPR2019)
 
-Project page: http://www.toyota-ti.ac.jp/Lab/Denshi/iim/members/muhammad.haris/projects/RBPN.html
+Project page: https://alterzero.github.io/projects/RBPN.html
 
 ## Dependencies
 * Python 3.5
@@ -21,7 +21,7 @@ Project page: http://www.toyota-ti.ac.jp/Lab/Denshi/iim/members/muhammad.haris/p
     eval.py
     ```
 
-![DBPN](http://www.toyota-ti.ac.jp/Lab/Denshi/iim/members/muhammad.haris/projects/RBPN.png)
+![DBPN](https://alterzero.github.io/projects/RBPN.png)
 
 ## Citations
 If you find this work useful, please consider citing it.
