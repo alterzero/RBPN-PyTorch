@@ -24,7 +24,7 @@ parser = argparse.ArgumentParser(description='PyTorch Super Res Example')
 parser.add_argument('--upscale_factor', type=int, default=4, help="super resolution upscale factor")
 parser.add_argument('--testBatchSize', type=int, default=1, help='testing batch size')
 parser.add_argument('--gpu_mode', type=bool, default=True)
-parser.add_argument('--chop_forward', type=bool, default=True)
+parser.add_argument('--chop_forward', type=bool, default=False)
 parser.add_argument('--threads', type=int, default=1, help='number of threads for data loader to use')
 parser.add_argument('--seed', type=int, default=123, help='random seed to use. Default=123')
 parser.add_argument('--gpus', default=1, type=int, help='number of gpu')
@@ -57,14 +57,13 @@ testing_data_loader = DataLoader(dataset=test_set, num_workers=opt.threads, batc
 
 print('===> Building model ', opt.model_type)
 if opt.model_type == 'RBPN':
-    model = RBPN(num_channels=3, base_filter=256,  feat = 64, num_stages=3, n_resblock=5, nFrames=opt.nFrames, scale_factor=opt.upscale_factor) ###D-DBPN
+    model = RBPN(num_channels=3, base_filter=256,  feat = 64, num_stages=3, n_resblock=5, nFrames=opt.nFrames, scale_factor=opt.upscale_factor)
 
 if cuda:
     model = torch.nn.DataParallel(model, device_ids=gpus_list)
 
-if os.path.exists(opt.model):
-    model.load_state_dict(torch.load(opt.model, map_location=lambda storage, loc: storage))
-    print('Pre-trained SR model is loaded.')
+model.load_state_dict(torch.load(opt.model, map_location=lambda storage, loc: storage))
+print('Pre-trained SR model is loaded.')
 
 if cuda:
     model = model.cuda(gpus_list[0])
@@ -163,7 +162,7 @@ def chop_forward(x, neigbor, flow, model, scale, shave=8, min_size=2000, nGPUs=o
     shave *= scale
 
     with torch.no_grad():
-        output = Variable(x.data.new(b, c, h, w), volatile=True)
+        output = Variable(x.data.new(b, c, h, w))
     output[:, :, 0:h_half, 0:w_half] \
         = outputlist[0][:, :, 0:h_half, 0:w_half]
     output[:, :, 0:h_half, w_half:w] \
