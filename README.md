@@ -9,6 +9,7 @@ Project page: https://alterzero.github.io/projects/RBPN.html
   ```Shell
   cd pyflow/
   python setup.py build_ext -i
+  cp pyflow*.so ..
   ```
 
 
