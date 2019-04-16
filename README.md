@@ -6,6 +6,11 @@ Project page: https://alterzero.github.io/projects/RBPN.html
 * Python 3.5
 * PyTorch >= 1.0.0
 * Pyflow -> https://github.com/pathak22/pyflow
+  ```Shell
+  cd pyflow/
+  python setup.py build_ext -i
+  ```
+
 
 ## Dataset
 * [Vimeo-90k Dataset](http://toflow.csail.mit.edu)
