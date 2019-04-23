@@ -50,7 +50,10 @@ def load_img_future(filepath, nFrames, scale, other_dataset):
         
         char_len = len(filepath)
         neigbor=[]
-        seq = [x for x in range(-tt,tt+1) if x!=0]
+        if nFrames%2 == 0:
+            seq = [x for x in range(-tt,tt) if x!=0] # or seq = [x for x in range(-tt+1,tt+1) if x!=0]
+        else:
+            seq = [x for x in range(-tt,tt+1) if x!=0]
         #random.shuffle(seq) #if random sequence
         for i in seq:
             index1 = int(filepath[char_len-7:char_len-4])+i
