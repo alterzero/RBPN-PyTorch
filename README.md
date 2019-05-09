@@ -2,6 +2,9 @@
 
 Project page: https://alterzero.github.io/projects/RBPN.html
 
+## NEWS
+* May 9, 2019 -> Added RBPN_F11 (this model was used on NTIRE2019)
+
 ## Dependencies
 * Python 3.5
 * PyTorch >= 1.0.0
@@ -11,9 +14,6 @@ Project page: https://alterzero.github.io/projects/RBPN.html
   python setup.py build_ext -i
   cp pyflow*.so ..
   ```
-
-## NEWS
-* May 9, 2019 -> Added RBPN_F11 (this model was used on NTIRE2019)
 
 ## Dataset
 * [Vimeo-90k Dataset](http://toflow.csail.mit.edu)
