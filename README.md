@@ -12,6 +12,8 @@ Project page: https://alterzero.github.io/projects/RBPN.html
   cp pyflow*.so ..
   ```
 
+## NEWS
+* May 9, 2019 -> Added RBPN_F11 (this model was used on NTIRE2019)
 
 ## Dataset
 * [Vimeo-90k Dataset](http://toflow.csail.mit.edu)
@@ -32,7 +34,7 @@ Project page: https://alterzero.github.io/projects/RBPN.html
 
 ![RBPN](https://alterzero.github.io/projects/RBPN.png)
 
-## Our other paper for Image Super-Resolution
+## Our paper on Image Super-Resolution
 ### [Deep Back-Projection Networks for Super-Resolution (CVPR2018)](https://github.com/alterzero/DBPN-Pytorch)
 #### Winner (1st) of [NTIRE2018](http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w13/Timofte_NTIRE_2018_Challenge_CVPR_2018_paper.pdf) Competition (Track: x8 Bicubic Downsampling)
 #### Winner of [PIRM2018](https://arxiv.org/pdf/1809.07517.pdf) (1st on Region 2, 3rd on Region 1, and 5th on Region 3)
