@@ -18,6 +18,9 @@ Project page: https://alterzero.github.io/projects/RBPN.html
 ## Dataset
 * [Vimeo-90k Dataset](http://toflow.csail.mit.edu)
 
+## Pretrained Model and Testset
+https://drive.google.com/drive/folders/1sI41DH5TUNBKkxRJ-_w5rUf90rN97UFn?usp=sharing
+
 ## HOW TO
 
 #Training
