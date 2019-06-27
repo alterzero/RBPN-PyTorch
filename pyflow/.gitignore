@@ -1,5 +1,4 @@
 build
-*.cpp
 **/*.npy
 *.so
 examples/car2Warped_new.jpg
