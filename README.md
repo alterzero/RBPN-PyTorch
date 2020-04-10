@@ -3,6 +3,7 @@
 Project page: https://alterzero.github.io/projects/RBPN.html
 
 ## NEWS
+* Apr 1, 2020 -> NEW paper on Space-Time Super-Resolution [STARnet](https://github.com/alterzero/STARnet) (to appear in CVPR2020)
 * May 9, 2019 -> Added RBPN_F11 (this model was used on NTIRE2019)
 
 ## Dependencies
